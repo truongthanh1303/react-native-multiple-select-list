@@ -38,6 +38,12 @@ export default class CustomMultiPicker extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.selected.length !== this.state.selected.length) {
+      this.setState({selected: nextProps.selected});
+    }
+  }
+
   getNewDimensions(event){
         var pageHeight = event.nativeEvent.layout.height
         var pageWidth = event.nativeEvent.layout.width
@@ -129,6 +135,7 @@ export default class CustomMultiPicker extends Component {
         </View>}
         <ScrollView
           style={[{ padding: 5, height: this.props.scrollViewHeight }, this.props.scrollViewStyle]}
+          contentContainerStyle={{flexGrow : 1}}
         >
           {labels.map((label, index) => {
             const itemKey = returnValue == "label" ? label : values[index]
