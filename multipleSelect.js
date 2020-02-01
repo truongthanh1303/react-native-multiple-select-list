@@ -53,7 +53,7 @@ export default class CustomMultiPicker extends Component {
     }
 
   _onSelect = (item) => {
-    var selected = this.state.selected
+    var selected = [...this.state.selected]
     if(this.props.multiple){
       if(selected.indexOf(item) == -1){
         selected.push(item)
