@@ -43,6 +43,7 @@ export default class CustomMultiPicker extends Component {
       this.setState({selected: nextProps.selected});
     }
   }
+  
 
   getNewDimensions(event){
         var pageHeight = event.nativeEvent.layout.height
@@ -143,13 +144,16 @@ export default class CustomMultiPicker extends Component {
               <TouchableOpacity
                 key={Math.round(Math.random() * 1000000)}
                 style={[{
-                  padding: 7,
+                  paddingLeft: 7,
+                  paddingRight: 7,
+                  paddingTop: 10,
+                  paddingBottom: 10,
                   marginTop: 0,
                   marginLeft: 2,
                   marginRight: 2,
                   marginBottom: 6,
                   backgroundColor: this.props.rowBackgroundColor,
-                  height: this.props.rowHeight,
+                  // height: this.props.rowHeight,
                   flexDirection: 'row',
                   justifyContent: 'space-between',
                   alignItems: 'center',
@@ -161,23 +165,29 @@ export default class CustomMultiPicker extends Component {
                   this._onSelect(itemKey)
                 }}
               >
-                {React.isValidElement(label)
-                  ?
-                  label
-                  :
-                  <Text style={this.props.labelStyle}>{label}</Text>
-                }
-                {
+                <View style={{ flex: 1 }}>
+                  {React.isValidElement(label)
+                    ?
+                    label
+                    :
+                    <Text style={this.props.labelStyle}>{label}</Text>
+                  }
+                </View>
+                <View style={{
+                  width: 30,
+                }}>
+                  {
 
-                  this._isSelected(itemKey) ?
-                  <Icon name={this.props.selectedIconName}
-                        style={[{color: this.props.iconColor, fontSize: this.props.iconSize}, this.props.selectedIconStyle]}
-                        />
-                  :
-                  <Icon name={this.props.unselectedIconName}
-                        style={[{color: this.props.iconColor, fontSize: this.props.iconSize}, this.props.unselectedIconStyle]}
-                        />
-                }
+                    this._isSelected(itemKey) ?
+                    <Icon name={this.props.selectedIconName}
+                          style={[{color: this.props.iconColor, fontSize: this.props.iconSize}, this.props.selectedIconStyle]}
+                          />
+                    :
+                    <Icon name={this.props.unselectedIconName}
+                          style={[{color: this.props.iconColor, fontSize: this.props.iconSize}, this.props.unselectedIconStyle]}
+                          />
+                  }
+                </View>
               </TouchableOpacity>
             )
           })}
